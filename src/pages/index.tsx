@@ -1,6 +1,14 @@
 import Head from "next/head";
+import styles from "@/styles/Home.module.css";
+import { FormEvent, useState } from "react";
 
 export default function Home() {
+  const [seminarID, setSeminatID] = useState("");
+
+  const submitHandler = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log(seminarID);
+  };
   return (
     <>
       <Head>
@@ -9,7 +17,16 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main></main>
+      <main>
+        <form className={styles.div} onSubmit={submitHandler}>
+          <label>Введите номер семинара</label>
+          <input
+            value={seminarID}
+            onChange={(e) => setSeminatID(e.target.value)}
+          />
+          <input type="submit" value="Отправить" />
+        </form>
+      </main>
     </>
   );
 }
